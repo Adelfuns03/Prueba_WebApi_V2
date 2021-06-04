@@ -26,28 +26,28 @@ namespace WebAPI.Controllers
             _env = env;
         }
 
-        [HttpGet]
+        [HttpGet]   // Metodo API para tomar detalles de la tabla que se encuentra en la base de datos
         public JsonResult Get()
         {
             string query = @"
                     select 
                     convert(varchar(10),Fecha,120) as Fecha,
-                    IDInfo, Noticias, Clima
-                    from dbo.newyork
+                    IDInfo, Titulo, Autor, Descripcion
+                    from dbo.noticias
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoCiudad");
+            string sqlDataSource = _configuration.GetConnectionString("InfoNewYork");
             SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                myCon2.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon2))
                 {
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader); ;
 
                     myReader.Close();
-                    myCon.Close();
+                    myCon2.Close();
                 }
             }
 
@@ -56,32 +56,33 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
-        public JsonResult Post(NewYork emp)
+        public JsonResult Post(Cartagena emp)
         {
             string query = @"
-                    insert into dbo.newyork
-                    (Fecha,Noticias,Clima)
+                    insert into dbo.noticias
+                    (Fecha,Titulo,Autor,Descripcion)
                     values 
                     (
                     '" + emp.Fecha + @"'
-                    ,'" + emp.Noticias + @"'
-                    ,'" + emp.Clima + @"'
-                    
+                    ,'" + emp.Titulo + @"'
+                    ,'" + emp.Autor + @"'
+                    ,'" + emp.Descripcion + @"'
+
                     )
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoCiudad");
+            string sqlDataSource = _configuration.GetConnectionString("InfoNewYork");
             SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                myCon2.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon2))
                 {
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader); ;
 
                     myReader.Close();
-                    myCon.Close();
+                    myCon2.Close();
                 }
             }
 
@@ -90,28 +91,29 @@ namespace WebAPI.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(NewYork emp)
+        public JsonResult Put(Cartagena emp)
         {
             string query = @"
-                    update dbo.newyork set 
+                    update dbo.noticias set 
                     Fecha = '" + emp.Fecha + @"'
-                    ,Noticias = '" + emp.Noticias + @"'
-                    ,Clima = '" + emp.Clima + @"'
+                    ,Noticias = '" + emp.Titulo + @"'
+                    ,Clima = '" + emp.Autor + @"'
+                    ,Clima = '" + emp.Descripcion + @"'
                     where IDInfo = " + emp.IDInfo + @" 
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoCiudad");
+            string sqlDataSource = _configuration.GetConnectionString("InfoNewYork");
             SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                myCon2.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon2))
                 {
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader); ;
 
                     myReader.Close();
-                    myCon.Close();
+                    myCon2.Close();
                 }
             }
 
@@ -123,22 +125,22 @@ namespace WebAPI.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                    delete from dbo.newyork
+                    delete from dbo.noticias
                     where IDInfo = " + id + @" 
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoCiudad");
+            string sqlDataSource = _configuration.GetConnectionString("InfoNewYork");
             SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                myCon2.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon2))
                 {
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader); ;
 
                     myReader.Close();
-                    myCon.Close();
+                    myCon2.Close();
                 }
             }
 
@@ -147,31 +149,56 @@ namespace WebAPI.Controllers
 
 
 
-        [Route("GetAllinfo")]
-        public JsonResult GetNombresdelasAreas()
+        [Route("GetNoticias")]
+        public JsonResult GetNoticias()
         {
             string query = @"
-                    select Fecha,Noticias,Clima from dbo.newyork
+                    select Fecha,Titulo,Autor,Descripcion from dbo.noticias
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoCiudad");
+            string sqlDataSource = _configuration.GetConnectionString("InfoNewYork");
             SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                myCon2.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon2))
                 {
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader); ;
 
                     myReader.Close();
-                    myCon.Close();
+                    myCon2.Close();
                 }
             }
 
             return new JsonResult(table);
         }
 
+        [Route("GetClima")]
 
+        public JsonResult GetClima()
+        {
+            string query = @"
+                    select Temperatura,Descripcion from dbo.clima
+                    ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("InfoNewYork");
+            SqlDataReader myReader;
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
+            {
+                myCon2.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon2))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+
+                    myReader.Close();
+                    myCon2.Close();
+                }
+            }
+
+            return new JsonResult(table);
+        }
     }
 }
+

@@ -27,14 +27,14 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Enable CORS
+            //Se habilitan permisos 
             services.AddCors(c =>
             {
                 c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod()
                  .AllowAnyHeader());
             });
 
-            //JSON Serializer
+            // Se inicia el serializador JSON 
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft
@@ -64,13 +64,6 @@ namespace WebAPI
                 endpoints.MapControllers();
             });
 
-
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "Fotos")),
-                RequestPath = "/Fotos"
-            });
         }
     }
 }

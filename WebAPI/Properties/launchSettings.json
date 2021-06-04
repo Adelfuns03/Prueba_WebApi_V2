@@ -20,7 +20,7 @@
     "WebAPI": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "api/bogota",
       "applicationUrl": "http://localhost:53535",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

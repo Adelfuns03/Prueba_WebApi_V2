@@ -5,12 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+    <Compile Remove="Fotos\**" />
+    <Content Remove="Fotos\**" />
+    <EmbeddedResource Remove="Fotos\**" />
+    <None Remove="Fotos\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fotos\" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

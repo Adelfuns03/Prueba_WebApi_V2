@@ -8,10 +8,11 @@ namespace WebAPI.Models
 {
     public class NewYork
     {
-        public int IDInfo{ get; set; }
+        public int IDInfo { get; set; }
         public string Fecha { get; set; }
-        public string Noticias { get; set; }
-        public string Clima { get; set; }
+        public string Titulo { get; set; }
+        public string Autor { get; set; }
+        public string Descripcion { get; set; }
 
     }
 }

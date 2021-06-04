@@ -13,11 +13,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BogotaController : ControllerBase
+    public class CartagenaController : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
-        public BogotaController(IConfiguration configuration)
+        public CartagenaController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
                     from dbo.noticias
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoCartagena");
             SqlDataReader myReader;
             using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
@@ -67,7 +67,7 @@ namespace WebAPI.Controllers
                     )
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoCartagena");
             SqlDataReader myReader;
             using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
@@ -98,7 +98,7 @@ namespace WebAPI.Controllers
                     where IDInfo = " + emp.IDInfo + @" 
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoCartagena");
             SqlDataReader myReader;
             using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
@@ -125,7 +125,7 @@ namespace WebAPI.Controllers
                     where IDInfo = " + id + @" 
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoCartagena");
             SqlDataReader myReader;
             using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
@@ -152,7 +152,7 @@ namespace WebAPI.Controllers
                     select Fecha,Titulo,Autor,Descripcion from dbo.noticias
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoCartagena");
             SqlDataReader myReader;
             using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
@@ -178,7 +178,7 @@ namespace WebAPI.Controllers
                     select Temperatura,Descripcion from dbo.clima
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoCartagena");
             SqlDataReader myReader;
             using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
             {
