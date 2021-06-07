@@ -56,7 +56,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
-        public JsonResult Post(Cartagena emp)
+        public JsonResult Post(NewYork emp)
         {
             string query = @"
                     insert into dbo.noticias
@@ -91,7 +91,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(Cartagena emp)
+        public JsonResult Put(NewYork emp)
         {
             string query = @"
                     update dbo.noticias set 

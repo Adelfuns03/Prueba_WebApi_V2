@@ -32,9 +32,9 @@ namespace WebAPI.Controllers
                     from dbo.noticias
                     ";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("InfoBogota");
+            string sqlDataSource = _configuration.GetConnectionString("InfoBogota"); // Se define una variable para almacenar la cadena de conexión de la base de datos
             SqlDataReader myReader;
-            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource))
+            using (SqlConnection myCon2 = new SqlConnection(sqlDataSource)) // Se ejecuta la consulta y completa los resultados en un data table
             {
                 myCon2.Open();
                 using (SqlCommand myCommand = new SqlCommand(query, myCon2))
